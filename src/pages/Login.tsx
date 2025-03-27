@@ -10,17 +10,15 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { useAuth } from '@/contexts/AuthContext';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
  
 const formSchema = z.object({
    email: z.string().email('Please enter a valid email address'),
    password: z.string().min(6, 'Password must be at least 6 characters'),
- });
+});
  
- type FormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof formSchema>;
  
- const Login = () => {
+const Login = () => {
    const [showPassword, setShowPassword] = React.useState(false);
    const navigate = useNavigate();
    const location = useLocation();
@@ -47,11 +45,12 @@ const formSchema = z.object({
  
    return (
      <div className="min-h-screen flex flex-col">
-       <Navbar />
-       
        <main className="flex-grow flex items-center justify-center py-20 px-4">
          <Card className="w-full max-w-md shadow-lg animate-fade-in">
            <CardHeader className="space-y-1">
+             <div className='pb-2'>
+                <Link to="/" className='text-sm hover:underline'>← Back to Home</Link>
+             </div>
              <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
              <CardDescription className="text-center">
                Enter your credentials to access your account
@@ -135,8 +134,6 @@ const formSchema = z.object({
            </CardFooter>
          </Card>
        </main>
-       
-       <Footer />
      </div>
    );
 };

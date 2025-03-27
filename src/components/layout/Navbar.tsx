@@ -63,8 +63,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <NavLink to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-energy-blue to-energy-teal flex items-center justify-center text-white font-semibold text-sm">EM</div>
-            <span className="font-semibold text-lg tracking-tight">EnergyMindset</span>
+            <img src="/nature.png" alt="" height={30} width={30} />
+            <span className="font-semibold text-lg tracking-tight">EcoTrack</span>
           </NavLink>
 
           {/* Desktop Navigation */}
