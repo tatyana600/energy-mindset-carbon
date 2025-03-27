@@ -1,0 +1,142 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 150 20% 98%;
+    --foreground: 145 47% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 145 47% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 145 47% 15%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 150 20% 98%;
+
+    --secondary: 150 20% 96%;
+    --secondary-foreground: 145 47% 15%;
+
+    --muted: 150 20% 96%;
+    --muted-foreground: 145 16% 47%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 145 47% 15%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 150 20% 98%;
+
+    --border: 145 32% 91%;
+    --input: 145 32% 91%;
+    --ring: 142 76% 30%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 145 5% 26%;
+    --sidebar-primary: 142 76% 36%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 150 20% 96%;
+    --sidebar-accent-foreground: 145 47% 15%;
+    --sidebar-border: 145 32% 91%;
+    --sidebar-ring: 142 76% 30%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+}
+
+/* Glass morphism */
+.glassmorphism {
+  @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-glass;
+}
+
+.glassmorphism-dark {
+  @apply bg-black/10 backdrop-blur-lg border border-white/10 shadow-glass;
+}
+
+/* Card styles */
+.card-hover {
+  @apply transition-all duration-300 hover:translate-y-[-5px] hover:shadow-md;
+}
+
+/* Custom animations */
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animate-delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Progress bar */
+.progress-bar {
+  @apply relative h-2 w-full overflow-hidden rounded-full bg-secondary;
+}
+
+.progress-bar-fill {
+  @apply absolute left-0 top-0 h-full bg-primary origin-left animate-progress-fill;
+}
+
+/* Button hover effect */
+.btn-hover-effect {
+  @apply relative overflow-hidden transition-all duration-300 after:absolute after:inset-0 after:z-[-1] after:bg-primary/10 after:opacity-0 after:transition-opacity hover:after:opacity-100;
+}
+
+/* Section transitions */
+.section-animate {
+  @apply opacity-0 translate-y-4 transition duration-700 ease-out;
+}
+
+.section-animate.animate-in {
+  @apply opacity-100 translate-y-0;
+}
+
+/* Navigation link */
+.nav-link {
+  @apply relative py-2 text-foreground/80 transition-colors after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:text-foreground hover:after:w-full;
+}
+
+.nav-link.active {
+  @apply text-foreground after:w-full;
+}
+
+/* Badge */
+.badge {
+  @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors;
+}
+
+/* Pulse effect */
+.pulse-effect::before {
+  content: '';
+  @apply absolute inset-0 rounded-full scale-110 animate-pulse-gentle opacity-70;
+}
