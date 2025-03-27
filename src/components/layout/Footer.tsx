@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-energy-blue to-energy-teal flex items-center justify-center text-white font-semibold text-sm">EM</div>
-              <span className="font-semibold text-lg tracking-tight">EnergyMindset</span>
+              <span className="font-semibold text-lg tracking-tight">Ecotrack</span>
             </div>
             <p className="text-muted-foreground text-sm max-w-xs">
               Empowering individuals to monitor, reduce, and take control of their energy consumption.
@@ -51,7 +51,7 @@ const Footer = () => {
         </div>
         
         <div className="mt-12 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© {currentYear} EnergyMindset. All rights reserved.</p>
+          <p>© {currentYear} Ecotrack. All rights reserved.</p>
         </div>
       </div>
     </footer>

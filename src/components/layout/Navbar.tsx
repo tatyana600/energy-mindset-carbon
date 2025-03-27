@@ -1,21 +1,35 @@
-
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Home, BarChart, BookOpen, Calculator, Users } from 'lucide-react';
+import { NavLink, useLocation, Link } from 'react-router-dom';
+import { Menu, X, Home, BarChart, BookOpen, Calculator, Users, LogIn, LogOut, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
-const navItems = [
-  { path: '/', label: 'Home', icon: Home },
-  { path: '/dashboard', label: 'Dashboard', icon: BarChart },
-  { path: '/resources', label: 'Resources', icon: BookOpen },
-  { path: '/calculator', label: 'Calculator', icon: Calculator },
-  { path: '/community', label: 'Community', icon: Users },
-];
+const getNavItems = (isAuthenticated: boolean) => {
+  const publicItems = [
+    { path: '/', label: 'Home', icon: Home },
+    { path: '/resources', label: 'Resources', icon: BookOpen },
+    { path: '/community', label: 'Community', icon: Users },
+  ];
+  
+  const privateItems = [
+    { path: '/dashboard', label: 'Dashboard', icon: BarChart },
+    { path: '/calculator', label: 'Calculator', icon: Calculator },
+  ];
+
+  return isAuthenticated 
+    ? [...publicItems, ...privateItems]
+    : publicItems;
+};
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
+  
+  const navItems = getNavItems(!!user);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +44,11 @@ const Navbar = () => {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
+
+  const handleLogout = () => {
+    logout();
+    toast.success('Successfully logged out');
+  };
 
   return (
     <header 
@@ -65,6 +84,34 @@ const Navbar = () => {
             ))}
           </nav>
 
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center gap-4">
+            {user ? (
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-muted-foreground">Hello, {user.name}</span>
+                <Button variant="outline" size="sm" onClick={handleLogout}>
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="outline" size="sm">
+                    <LogIn className="w-4 h-4 mr-2" />
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button size="sm">
+                    <User className="w-4 h-4 mr-2" />
+                    Register
+                  </Button>
+                </Link>
+              </>
+            )}
+          </div>
+
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -99,6 +146,39 @@ const Navbar = () => {
                 {item.label}
               </NavLink>
             ))}
+            
+            {/* Mobile Auth Buttons */}
+            {user ? (
+              <div className="border-t border-border mt-4 pt-4">
+                <div className="px-4 py-2 text-sm text-muted-foreground mb-2">
+                  Logged in as {user.name}
+                </div>
+                <button 
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 py-2 px-4 w-full rounded-lg text-left hover:bg-secondary text-destructive"
+                >
+                  <LogOut className="w-5 h-5" />
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col space-y-2 border-t border-border mt-4 pt-4">
+                <Link 
+                  to="/login"
+                  className="flex items-center gap-2 py-2 px-4 rounded-lg hover:bg-secondary"
+                >
+                  <LogIn className="w-5 h-5" />
+                  Login
+                </Link>
+                <Link 
+                  to="/register" 
+                  className="flex items-center gap-2 py-2 px-4 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90"
+                >
+                  <User className="w-5 h-5" />
+                  Register
+                </Link>
+              </div>
+            )}
           </nav>
         </div>
       )}

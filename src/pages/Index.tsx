@@ -51,7 +51,7 @@ const Index = () => {
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="flex flex-col items-center text-center max-w-4xl mx-auto animate-fade-in">
               <Badge className="mb-6 px-4 py-1 text-sm" variant="outline">
-                Energy Mindset Collective
+                Ecotrack Collective
               </Badge>
               <h1 className="text-4xl md:text-6xl font-semibold leading-tight mb-6">
                 Monitor, Reduce, and <span className="text-energy-blue">Transform</span> Your Energy Impact
