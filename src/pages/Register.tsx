@@ -1,19 +1,17 @@
 import React from 'react';
- import { useNavigate, Link } from 'react-router-dom';
- import { useForm } from 'react-hook-form';
- import { z } from 'zod';
- import { zodResolver } from '@hookform/resolvers/zod';
- import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
- import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
- import { Input } from '@/components/ui/input';
- import { Button } from '@/components/ui/button';
- import { toast } from 'sonner';
- import { useAuth } from '@/contexts/AuthContext';
- import { Eye, EyeOff, User } from 'lucide-react';
- import Navbar from '@/components/layout/Navbar';
- import Footer from '@/components/layout/Footer';
+import { useNavigate, Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+import { useAuth } from '@/contexts/AuthContext';
+import { Eye, EyeOff, User } from 'lucide-react';
  
- const formSchema = z.object({
+const formSchema = z.object({
    name: z.string().min(2, 'Name must be at least 2 characters'),
    email: z.string().email('Please enter a valid email address'),
    password: z.string().min(6, 'Password must be at least 6 characters'),
@@ -21,11 +19,11 @@ import React from 'react';
  }).refine((data) => data.password === data.confirmPassword, {
    message: "Passwords don't match",
    path: ["confirmPassword"],
- });
+});
  
- type FormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof formSchema>;
  
- const Register = () => {
+const Register = () => {
    const [showPassword, setShowPassword] = React.useState(false);
    const navigate = useNavigate();
    const { register, error, loading } = useAuth();
@@ -51,9 +49,7 @@ import React from 'react';
    };
  
    return (
-     <div className="min-h-screen flex flex-col">
-       <Navbar />
-       
+     <div className="min-h-screen flex flex-col">       
        <main className="flex-grow flex items-center justify-center py-20 px-4">
          <Card className="w-full max-w-md shadow-lg animate-fade-in">
            <CardHeader className="space-y-1">
@@ -168,8 +164,6 @@ import React from 'react';
            </CardFooter>
          </Card>
        </main>
-       
-       <Footer />
      </div>
    );
 };
